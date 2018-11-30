@@ -28,7 +28,9 @@ Complete the `Graph` class, either as an adjacency list or adjacency matrix, per
 > - Create and use Trello boards, Slack, etc. to help you all communicate and organize yourselves
 
 ## Project proposal/description:
-[insert paragraph here]
+![Example](resources/example.jpg)
+![Description](resources/descr.jpg)
+![Project Management](resources/PM.jpg)
 
 ## Graph algorithm used:
 [insert name of algorithm here and how it's used]
