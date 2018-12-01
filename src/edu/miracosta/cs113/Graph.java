@@ -1,7 +1,5 @@
 package edu.miracosta.cs113;
 
-import com.sun.javafx.geom.Edge;
-
 import java.util.Iterator;
 
 public interface Graph
@@ -43,7 +41,7 @@ public interface Graph
      * of Double.POSITIVE_INFINITY if there is no edge.
      */
 
-    Edge getEdge(int source, int dest);
+    edu.miracosta.cs113.Edge getEdge(int source, int dest);
 
 
     /**
@@ -52,5 +50,5 @@ public interface Graph
      * @return An Iterator<Edge> to the vertices connected to the source.
      */
 
-    Iterator<Edge> edgeIterator(int source);
+    Iterator<edu.miracosta.cs113.Edge> edgeIterator(int source);
 }
