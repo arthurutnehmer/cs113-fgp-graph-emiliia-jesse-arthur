@@ -81,31 +81,4 @@ public class ListGraph extends AbstractGraph
         // Assert: All edges for source checked.
         return target; // Desired edge not found.
     }
-
-    /** Load the edges of a graph from the data in an input file.
-     The file should contain a series of lines, each line
-     with two or three data values. The first is the source
-     the second is the destination, and the optional third
-     is the weight
-     @param scan The scanner that contains info about the file.
-     @throws IOException - If an I/O error occurs
-     */
-    public void loadEdgesFromFile(Scanner scan) throws IOException
-    {
-        String line;
-        while (scan.hasNextLine())
-        {
-            line = scan.nextLine();
-            String[] tokens = line.split("\\s+");
-            int source = Integer.parseInt(tokens[0]);
-            int dest = Integer.parseInt(tokens[1]);
-            double weight = 1.0;
-            if (tokens.length == 3)
-            {
-                weight = Double.parseDouble(tokens[2]);
-            }
-            insert(new Edge(source, dest, weight));
-        }
-    }
-
 }

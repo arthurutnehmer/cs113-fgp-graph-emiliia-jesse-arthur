@@ -58,7 +58,46 @@ public abstract class AbstractGraph implements Graph
         this.directed = directed;
     }
 
-    public static Graph createGraph(Scanner scan, boolean isDirected, String type) throws IOException
+    //Other Methods
+    /**
+     * Load the edges of a graph from the data in an input file.
+     * The file should contain a series of lines, each line
+     * with two or three data values. The first is the source
+     * the second is the destination, and the optional third
+     * is the weight
+     * @param scan The scanner that contains info about the file.
+     * @throws IOException - If an I/O error occurs
+     */
+    public void loadEdgesFromFile(Scanner scan)
+    {
+        String line;
+        while (scan.hasNextLine())
+        {
+            line = scan.nextLine();
+            String[] tokens = line.split("\\s+");
+            int source = Integer.parseInt(tokens[0]);
+            int dest = Integer.parseInt(tokens[1]);
+            double weight = 1.0;
+            if (tokens.length == 3)
+            {
+                weight = Double.parseDouble(tokens[2]);
+            }
+            insert(new Edge(source, dest, weight));
+        }
+    }
+
+    /**
+     * Factory method to create a graph and load the data from an input file. The first line of the input file should
+     * contain the number of vertices. The remaining lines should contain the edge data as described under loadEdgesFromFile.
+     * @param scan The Scanner connected to the data file.
+     * @param isDirected true if this is a directed graph, false otherwise.
+     * @param type The string "List" if an adjacency list is to be created. Will throw IllegalArgumentException
+     *             if any other String is passed in. Currently only support the use of "List" as that is the graph
+     *             we have decided to implement.
+     * @return A Graph that has been created matching what it took in from the file.
+     * @throws IllegalArgumentException if type is not "List"
+     */
+    public static Graph createGraph(Scanner scan, boolean isDirected, String type)
     {
         int numV = scan.nextInt();
         AbstractGraph returnValue = null;
