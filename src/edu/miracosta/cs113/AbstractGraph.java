@@ -27,7 +27,6 @@ public abstract class AbstractGraph implements Graph
      * Return the number of vertices,
      * @return The number of vertices.
      */
-
     public int getNumV()
     {
         return numV;
@@ -42,17 +41,16 @@ public abstract class AbstractGraph implements Graph
     }
 
     /**
-     * Returns weather the graph is directed.
+     * Returns whether the graph is directed.
      * @return true if directed.
      */
-
     public boolean isDirected()
     {
         return directed;
     }
 
     /**
-     * Set wheather the graph is directed.
+     * Set whether the graph is directed.
      * @param directed This is set to true if the graph is directed.
      */
     public void setDirected(boolean directed)
