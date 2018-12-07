@@ -24,7 +24,7 @@ public abstract class AbstractGraph implements Graph
     }
 
     /**
-     * Return the number of vertices,
+     * Return the number of vertices
      * @return The number of vertices.
      */
     public int getNumV()
@@ -33,7 +33,8 @@ public abstract class AbstractGraph implements Graph
     }
 
     /**
-     * set the number of vertices,
+     * Set the number of vertices
+     * @param numV The number of vertices
      */
     public void setNumV(int numV)
     {
@@ -66,14 +67,15 @@ public abstract class AbstractGraph implements Graph
      * the second is the destination, and the optional third
      * is the weight
      * @param scan The scanner that contains info about the file.
-     * @throws IOException - If an I/O error occurs
      */
     public void loadEdgesFromFile(Scanner scan)
     {
         String line;
+        scan.nextLine();//Clear buffer
         while (scan.hasNextLine())
         {
             line = scan.nextLine();
+            System.out.println(line);
             String[] tokens = line.split("\\s+");
             int source = Integer.parseInt(tokens[0]);
             int dest = Integer.parseInt(tokens[1]);
@@ -108,7 +110,4 @@ public abstract class AbstractGraph implements Graph
         ((ListGraph) returnValue).loadEdgesFromFile(scan);
         return returnValue;
     }
-
-
-
 }

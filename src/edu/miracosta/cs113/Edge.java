@@ -14,8 +14,8 @@ public class Edge
      * Construct an Edge with a source of from
      * and a destination of to. Set the weight
      * to 1.0.
-     * @param from - The source vertex
-     * @param to - The destination vertex
+     * @param source - The source vertex
+     * @param dest - The destination vertex
      */
     public Edge(int source, int dest)
     {
@@ -28,8 +28,8 @@ public class Edge
      * Construct a weighted edge with a source
      * of from and a destination of to. Set the
      * weight to w.
-     * @param from - The source vertex
-     * @param to - The destination vertex
+     * @param source - The source vertex
+     * @param dest - The destination vertex
      * @param w - The weight
      */
     public Edge(int source, int dest, double w)

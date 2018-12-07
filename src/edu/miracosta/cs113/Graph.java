@@ -44,7 +44,7 @@ public interface Graph
     /**
      * Return an iterator to the edges connected to a given vertex.
      * @param source The source vertex.
-     * @return An Iterator<Edge> to the vertices connected to the source.
+     * @return An Iterator for Edge objects to the vertices connected to the source.
      */
     Iterator<edu.miracosta.cs113.Edge> edgeIterator(int source);
 }
