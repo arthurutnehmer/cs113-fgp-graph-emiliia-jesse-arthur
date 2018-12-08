@@ -1,4 +1,6 @@
 package edu.miracosta.cs113;
 
-public class CitiesGraph {
+public class CitiesGraph
+{
+
 }
