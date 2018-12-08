@@ -21,7 +21,26 @@ public class CitiesGraph {
         }
         citiesGraph = (ListGraph) ListGraph.createGraph(inputFile, false, "List");
     }
+
     /**
+     * Fill our parallel array holding the cities names.
+     * Pre: Assume that the city names correspond directly to their vertex indices within our Edges array.
+     * Post: The cityNames array has been filled with city names from file.
+     */
+    private void loadCitiesArrayFromFile() {
+        Scanner inputFile = null;
+        try {
+            inputFile = new Scanner(new File(DEFAULT_CITY_NAMES_FILE));
+        } catch(FileNotFoundException e) {
+            System.out.println("File not found please try again.");
+        }
+        int count = 0;
+        while(inputFile.hasNextLine()) {
+            String tempCity = inputFile.nextLine();
+            cityNames[count] = tempCity;
+            count++;
+        }
+    }
     /**
     /**
      * Dijkstra's Shortest-Path Algorithm
