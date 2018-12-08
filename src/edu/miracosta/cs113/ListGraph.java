@@ -82,4 +82,15 @@ public class ListGraph extends AbstractGraph
         // Assert: All edges for source checked.
         return target; // Desired edge not found.
     }
+
+    @Override
+    public String toString()
+    {
+        String toReturn = "";
+        for(int i = 0; i < edges.length; i++)
+        {
+            toReturn += edges[i].toString() + "\n";
+        }
+        return toReturn;
+    }
 }
