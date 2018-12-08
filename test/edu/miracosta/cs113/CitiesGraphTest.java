@@ -10,8 +10,8 @@ import static org.junit.Assert.fail;
 /**
  * Cities Graph Tester. Various J Unit tests to test Cities Graph Methods.
  */
-public class CitiesGraphTest {
-
+public class CitiesGraphTest
+{
     /**
      * An object of Cities Graph class.
      */
@@ -36,7 +36,8 @@ public class CitiesGraphTest {
      * This function is executed every single time before each test runs.
      */
     @Before
-    public void setup() {
+    public void setup()
+    {
         citiesGraphTest = new CitiesGraph();
     }
 
@@ -45,21 +46,25 @@ public class CitiesGraphTest {
      * Note: Had to format the doubles in order to use assertEquals.
      */
     @Test
-    public void testDijsktrasOutcomes() {
+    public void testDijsktrasOutcomes()
+    {
         NumberFormat formatter = new DecimalFormat("#0.00");
         int[] testPredecessors;
         double[] testDistances;
-        for(int row = 0; row < PREDECESSORS.length;row++) {
+        for(int row = 0; row < PREDECESSORS.length;row++)
+        {
             citiesGraphTest.runDijkstras(row);
             testPredecessors = citiesGraphTest.getPredecessors();
             testDistances = citiesGraphTest.getDistances();
             int[] expectedPredecessors = PREDECESSORS[row];
             double[] expectedDistances = DISTANCES[row];
-            for(int p = 0; p < testPredecessors.length; p++) {
+            for(int p = 0; p < testPredecessors.length; p++)
+            {
                 assertEquals("Expected Predecessors do not match.", testPredecessors[p], expectedPredecessors[p]);
             }
             //Had to get fancy with assertEquals for a double. Checking two doubles is not supported so formatted it before checking equality.
-            for(int d = 0; d < testDistances.length; d++) {
+            for(int d = 0; d < testDistances.length; d++)
+            {
                 assertEquals("Expected Destination does not match.", formatter.format(testDistances[d]),formatter.format(expectedDistances[d]));
             }
         }
