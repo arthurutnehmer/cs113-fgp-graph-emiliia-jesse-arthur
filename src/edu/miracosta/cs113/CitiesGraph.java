@@ -42,6 +42,18 @@ public class CitiesGraph {
         }
     }
     /**
+     * A method to print out the results after dijkstras has been ran and stored within distances and predeccesors arrays.
+     */
+    public void printShortestPath() {
+        for(int i = 0; i < predecessors.length; i++) {
+            System.out.printf("V: " + i + " - d[v]: " + "%.2f", distances[i]);
+            System.out.println(" - p[v]: " + predecessors[i]);
+            //If I want city names to print out uncomment below for use instead of above.
+              //System.out.printf("V: " + cityNames[i] + " - d[v]: " + "%.2f", distances[i]);
+              //System.out.println(" - p[v]: " + cityNames[predecessors[i]]);
+        }
+    }
+
     /**
      * Dijkstra's Shortest-Path Algorithm
      * @param graph The weighted graph to be searched
