@@ -2,20 +2,69 @@ package edu.miracosta.cs113;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class CitiesGraph {
+    private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/citiesInput.txt";
+    private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
     private ListGraph citiesGraph;
-    private Scanner inputFile;
     private String[] cityNames;
+    private int[] predecessors;
+    private double[] distances;
+    private int numberOfValues;
 
+    /**
+     * Default Constructor. Will use the default input file for initializing the graph. Will then set the length of our
+     * predecessors and distances arrays to match the number of vertices in our graph.
+     */
     public CitiesGraph() {
-        initializeGraph();
+        initializeGraph(DEFAULT_GRAPH_INPUT_FILE);
+        numberOfValues = citiesGraph.getNumV();
+        predecessors = new int[numberOfValues];
+        distances = new double[numberOfValues];
+        cityNames = new String[numberOfValues];
+        loadCitiesArrayFromFile();
     }
 
-    private void initializeGraph() {
+    /**
+     * With the passed in file name will create a ListGraph.
+     * Pre: That the file is in the proper format for loading edges from file described in AbstractGraph class's method.
+     * @param inputFileName String that will correspond to the properly formatted file to create our graph from.
+     */
+    public CitiesGraph(String inputFileName) {
+        initializeGraph(inputFileName);
+        numberOfValues = citiesGraph.getNumV();
+        predecessors = new int[numberOfValues];
+        distances = new double[numberOfValues];
+        cityNames = new String[numberOfValues];
+        loadCitiesArrayFromFile();
+    }
+
+    /**
+     * Get predecessors array.
+     * @return The predecessor array of type int.
+     */
+    public int[] getPredecessors() {
+        return predecessors;
+    }
+
+    /**
+     * Get distances array.
+     * @return The distances array of type double.
+     */
+    public double[] getDistances() {
+        return distances;
+    }
+
+    /**
+     * Initialize Graph using the passed in file name.
+     * @param inputFileName String for the file name holding the edges data to be input.
+     */
+    private void initializeGraph(String inputFileName) {
+        Scanner inputFile = null;
         try {
-            inputFile = new Scanner(new File("./resources/citiesInput.txt"));
+            inputFile = new Scanner(new File(inputFileName));
         } catch(FileNotFoundException e) {
             System.out.println("File not found please try again.");
         }
