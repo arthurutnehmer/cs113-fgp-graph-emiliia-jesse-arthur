@@ -41,6 +41,15 @@ public class CitiesGraph {
             count++;
         }
     }
+
+    /**
+     * Public run dijkstras method. All it takes in is the starting point.
+     * @param start int that corresponds to the starting vertex(city)
+     */
+    public void runDijkstras(int start) {
+        this.dijkstrasAlgorithm(this.citiesGraph, start, this.predecessors, this.distances);
+    }
+
     /**
      * A method to print out the results after dijkstras has been ran and stored within distances and predeccesors arrays.
      */
