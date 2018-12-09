@@ -38,6 +38,7 @@ public class FrontPage extends JFrame {
         panel1.add(cityCombo);
         add(panel1,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     private void fillCitiesCombo(){

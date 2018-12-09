@@ -25,5 +25,6 @@ public class ResultsPage extends JFrame {
         add(ratingTable,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400,400);
+        setLocationRelativeTo(null);
     }
 }
