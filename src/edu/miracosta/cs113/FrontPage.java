@@ -1,7 +1,12 @@
 package edu.miracosta.cs113;
 
 import javax.swing.*;
+import javax.swing.UIManager.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,10 +18,21 @@ public class FrontPage extends JFrame {
     private JLabel cityLabel;
     private JLabel rateLabel;
     private JButton rateButton;
-    private JTextField rateField;
+    private CustomTextField rateField;
+//    private JTextField rateField;
     private JComboBox<String> cityCombo;
 
     public FrontPage(){
+        try {
+            for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch(Exception e) {
+
+        }
         setLayout(new BorderLayout());
         welcomeLabel=new JLabel("Welcome to...");
         add(welcomeLabel,BorderLayout.NORTH);
@@ -27,15 +43,20 @@ public class FrontPage extends JFrame {
         setSize(400,400);
         panel1=new JPanel();
         panel1.setLayout(new GridLayout(3,2));
-        rateLabel=new JLabel("Enter infection rate:");
-        panel1.add(rateLabel);
-        rateField=new JTextField("in people/day");
-        panel1.add(rateField);
+
         cityLabel=new JLabel("Enter starting city:");
         panel1.add(cityLabel);
         cityCombo=new JComboBox<>();
         fillCitiesCombo();
         panel1.add(cityCombo);
+
+        rateLabel=new JLabel("Enter infection rate:");
+        panel1.add(rateLabel);
+//        rateField=new JTextField("in people per day");
+        CustomTextField rateField = new CustomTextField();
+        rateField.setPlaceholder("in people per day.");
+        panel1.add(rateField);
+
         add(panel1,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
