@@ -2,6 +2,7 @@ package edu.miracosta.cs113;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -50,7 +51,7 @@ public class CitiesGraph
      */
     public int[] getPredecessors()
     {
-        return predecessors;
+        return predecessors.clone();
     }
 
     /**
@@ -59,9 +60,48 @@ public class CitiesGraph
      */
     public double[] getDistances()
     {
-        return distances;
+        return distances.clone();
     }
 
+    /**
+     * private inner City used for sorting parallel arrays in getRating() method
+     */
+    private class City implements Comparable<City>{
+        double distance;
+        String name;
+
+        public City(String name, double distance){
+            this.distance=distance;
+            this.name=name;
+        }
+
+        public int compareTo(City other){
+            return (int)(this.distance-other.distance);
+        }
+
+    }
+
+    public String[][] getRating(){
+        City[] cities=new City[cityNames.length];
+        for(int i=0;i<cityNames.length;i++){
+            cities[i]=new City(cityNames[i],distances[i]);
+        }
+        Arrays.sort(cities);
+        String[][] rating=new String[2][cities.length];
+        for(int i=0;i<rating[0].length;i++){
+            rating[0][i]=cities[i].name;
+            rating[1][i]=String.valueOf(cities[i].distance);
+        }
+        return rating;
+    }
+
+    /**
+     * Get city names array.
+     * @return The city names array of type String.
+     */
+    public String[] getCityNames(){
+        return cityNames.clone();
+    }
     /**
      * Initialize Graph using the passed in file name.
      * @param inputFileName String for the file name holding the edges data to be input.
