@@ -76,7 +76,7 @@ public class CitiesGraph
         }
 
         public int compareTo(City other){
-            return (int)(this.distance-other.distance);
+            return (int)(this.distance*10-other.distance*10);
         }
 
     }
