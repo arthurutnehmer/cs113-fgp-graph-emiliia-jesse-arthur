@@ -5,7 +5,8 @@ import java.io.FileNotFoundException;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class CitiesGraph {
+public class CitiesGraph
+{
     private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/citiesInput.txt";
     private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
     private ListGraph citiesGraph;
@@ -121,9 +122,36 @@ public class CitiesGraph {
             System.out.printf("V: " + i + " - d[v]: " + "%.2f", distances[i]);
             System.out.println(" - p[v]: " + predecessors[i]);
             //If I want city names to print out uncomment below for use instead of above.
-              //System.out.printf("V: " + cityNames[i] + " - d[v]: " + "%.2f", distances[i]);
-              //System.out.println(" - p[v]: " + cityNames[predecessors[i]]);
+//              System.out.printf("V: " + cityNames[i] + " - d[v]: " + "%.2f", distances[i]);
+//              System.out.println(" - p[v]: " + cityNames[predecessors[i]]);
         }
+    }
+
+    /**
+     *
+     * @param destination
+     */
+    public void printPathToDestination(int destination)
+    {
+        int startVertex = -1;
+        int[] backtrackFromDestination = new int[distances.length - 1];
+        for(int i = 0; i < distances.length; i++) {
+            if(distances[i] == 0) {
+                startVertex = i;
+            }
+        }
+        int currentVertex = destination;
+        int count = 0;
+        do {
+            currentVertex = predecessors[currentVertex];
+            backtrackFromDestination[count] = currentVertex;
+            count++;
+        } while(predecessors[currentVertex] != startVertex);
+        System.out.println("BackTrack order is: ");
+        for(int temp : backtrackFromDestination) {
+            System.out.print(temp + " ");
+        }
+        System.out.println();
     }
 
     /**
@@ -133,7 +161,7 @@ public class CitiesGraph {
      * @param pred Output array to contain the predecessors in the shortest path.
      * @param dist Output array to contain the distance in the shortest path.
      */
-    public void dijkstrasAlgorithm(Graph graph, int start, int[] pred, double[]dist)
+    private void dijkstrasAlgorithm(Graph graph, int start, int[] pred, double[]dist)
     {
         int numV = graph.getNumV();
         HashSet<Integer> vMinusS = new HashSet<Integer>(numV);
