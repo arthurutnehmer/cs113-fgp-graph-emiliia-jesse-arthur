@@ -210,4 +210,11 @@ public class CitiesGraph
             }
         }
     }
+
+    public static void main(String[] args) {
+        CitiesGraph test = new CitiesGraph();
+        test.runDijkstras(0);
+        test.printShortestPath();
+        test.printPathToDestination(9);
+    }
 }
