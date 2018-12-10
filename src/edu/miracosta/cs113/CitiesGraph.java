@@ -2,6 +2,8 @@ package edu.miracosta.cs113;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -20,6 +22,10 @@ public class CitiesGraph
     /**
      * Default Constructor. Will use the default input file for initializing the graph. Will then set the length of our
      * predecessors and distances arrays to match the number of vertices in our graph.
+     *
+     * Post: cityNames array filled with cities from file.
+     *       citiesGraph has been initialized from file.
+     *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      */
     public CitiesGraph()
     {
@@ -32,8 +38,14 @@ public class CitiesGraph
     }
 
     /**
-     * With the passed in file name will create a ListGraph.
-     * Pre: That the file is in the proper format for loading edges from file described in AbstractGraph class's method.
+     * Constructor that will use the passed in file name to create our ListGraph.
+     *
+     * Pre: That the file is in the proper format for loading edges from file described in AbstractGraph class's
+     *      createGraph method.
+     *
+     * Post: cityNames array filled with cities from file.
+     *       citiesGraph has been initialized from file.
+     *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      * @param inputFileName String that will correspond to the properly formatted file to create our graph from.
      */
     public CitiesGraph(String inputFileName)
@@ -80,7 +92,7 @@ public class CitiesGraph
             return (int)(this.distance*10-other.distance*10);
         }
 
-    }
+    }//End of inner City class
 
     public String[][] getRating(){
         City[] cities=new City[cityNames.length];
