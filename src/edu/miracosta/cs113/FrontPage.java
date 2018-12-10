@@ -1,5 +1,6 @@
 package edu.miracosta.cs113;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.UIManager.*;
 import javax.swing.event.DocumentEvent;
@@ -19,10 +20,11 @@ public class FrontPage extends JFrame {
     private JLabel rateLabel;
     private JButton rateButton;
     private CustomTextField rateField;
-//    private JTextField rateField;
     private JComboBox<String> cityCombo;
+    private final String backgroundImageFile = "./resources/bioHazard.png";
 
     public FrontPage(){
+        //Must catch ClassNotFoundException, IllegalAccessException and UnsupportedLookAndFeelException.
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -31,33 +33,43 @@ public class FrontPage extends JFrame {
                 }
             }
         } catch(Exception e) {
-
+            e.getStackTrace();
         }
         setLayout(new BorderLayout());
         welcomeLabel=new JLabel("Welcome to...");
         add(welcomeLabel,BorderLayout.NORTH);
-        rateButton=new JButton("Get ratings");
-        Controller controller=new Controller();
-        rateButton.addActionListener(controller);
-        add(rateButton,BorderLayout.SOUTH);
-        setSize(400,400);
+        setSize(525,550);
         panel1=new JPanel();
+
+        try {
+            panel1 = new JPanelWithBackground(backgroundImageFile);
+        } catch(IOException e) {
+            System.out.println("Do you have all the necessary files to run this file? Please try again.");
+        }
         panel1.setLayout(new GridLayout(3,2));
 
-        cityLabel=new JLabel("Enter starting city:");
+        cityLabel=new JLabel(" Enter starting city:");
+        cityLabel.setFont(new Font("Serif", Font.BOLD, 20));
         panel1.add(cityLabel);
         cityCombo=new JComboBox<>();
         fillCitiesCombo();
         panel1.add(cityCombo);
 
         rateLabel=new JLabel("Enter infection rate:");
+        rateLabel.setFont(new Font("Serif", Font.BOLD, 20));
         panel1.add(rateLabel);
 //        rateField=new JTextField("in people per day");
-        CustomTextField rateField = new CustomTextField();
+        rateField = new CustomTextField();
         rateField.setPlaceholder("in people per day.");
         panel1.add(rateField);
 
+        rateButton = new JButton("Get Ratings");
+        Controller controller = new Controller();
+        rateButton.addActionListener(controller);
+        add(rateButton,BorderLayout.SOUTH);
+
         add(panel1,BorderLayout.CENTER);
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
@@ -77,6 +89,23 @@ public class FrontPage extends JFrame {
 
     protected int getChosenCity(){
         return cityCombo.getSelectedIndex();
+    }
+
+    private class JPanelWithBackground extends JPanel {
+        private Image backgroundImage;
+
+        // Some code to initialize the background image.
+        // Here, we use the constructor to load the image.
+        public JPanelWithBackground(String fileName) throws IOException {
+            backgroundImage = ImageIO.read(new File(fileName));
+        }
+
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // Draw the background image.
+            g.drawImage(backgroundImage, 0, 0, this);
+        }
     }
 
     private class CustomTextField extends JTextField {
@@ -198,5 +227,5 @@ public class FrontPage extends JFrame {
             setForeground(getPlaceholderForeground());
             setTextWrittenIn(false);
         }
-    }
+    }//End of Class CustomTextField
 }
