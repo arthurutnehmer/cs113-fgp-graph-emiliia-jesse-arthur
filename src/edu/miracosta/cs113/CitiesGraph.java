@@ -10,6 +10,7 @@ public class CitiesGraph
 {
     private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/citiesInput.txt";
     private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
+    private NumberFormat formatter = new DecimalFormat("#0.00");
     private ListGraph citiesGraph;
     private String[] cityNames;
     private int[] predecessors;
@@ -90,7 +91,7 @@ public class CitiesGraph
         String[][] rating=new String[2][cities.length];
         for(int i=0;i<rating[0].length;i++){
             rating[0][i]=cities[i].name;
-            rating[1][i]=String.valueOf(cities[i].distance);
+            rating[1][i]=String.valueOf(formatter.format(cities[i].distance));
         }
         return rating;
     }
