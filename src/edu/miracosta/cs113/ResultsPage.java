@@ -2,11 +2,6 @@ package edu.miracosta.cs113;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ResultsPage extends JFrame {
     private JLabel headerLabel;
@@ -15,16 +10,23 @@ public class ResultsPage extends JFrame {
     public ResultsPage(int numCities, String[][] rating){
         setLayout(new BorderLayout());
         headerLabel=new JLabel("Rating of cities from the most dangerous to safest");
+        //Change font to match other panel's
+        headerLabel.setFont(new Font("Serif",Font.ITALIC, 20));
         add(headerLabel,BorderLayout.NORTH);
         //TODO: make headers for columns in the table
+        String columnNames[] = {"Cities", "Distance From Starting City"};
         ratingTable=new JTable(numCities,2);
-        for(int i=0;i<rating[0].length;i++){
+        //Change font to match other panel's
+        ratingTable.setFont(new Font("Serif", Font.BOLD,18));
+        ratingTable.setValueAt("Cities",0,0);
+        ratingTable.setValueAt("Distances",0,1);
+        for(int i=1;i<rating[0].length;i++){
             ratingTable.setValueAt(rating[0][i],i,0);
             ratingTable.setValueAt(rating[1][i],i,1);
         }
         add(ratingTable,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400,400);
+        setSize(500,500);
         setLocationRelativeTo(null);
     }
 }
