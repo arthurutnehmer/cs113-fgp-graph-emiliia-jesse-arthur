@@ -84,7 +84,7 @@ public class TestOfListGraph
     }
 
     @Test
-    public void TestInsert()
+    public void testInsert()
     {
         insert();
         for(int i = 0; i< EDGES.length; i++)
@@ -94,13 +94,13 @@ public class TestOfListGraph
     }
 
     @Test
-    public void TestNumberOfEdges()
+    public void testNumberOfEdges()
     {
         assertEquals(testGraph.getNumV(), NUMBER_OF_EDGES);
     }
 
     @Test
-    public void TestDirected()
+    public void testDirected()
     {
         assertEquals(testGraph.isDirected(), false);
     }

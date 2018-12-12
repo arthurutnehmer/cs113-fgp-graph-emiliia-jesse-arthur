@@ -44,4 +44,4 @@ Complete the `Graph` class, either as an adjacency list or adjacency matrix, per
 ![UML](resources/UML/GraphsUML.png)
 
 ## Sequence Diagram (for driver):
-[insert image here]
+![Screenshots](resources/UML/MotionDiagram.png)
