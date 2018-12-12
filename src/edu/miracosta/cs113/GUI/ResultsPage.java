@@ -31,6 +31,7 @@ public class ResultsPage extends JFrame {
         }
         add(ratingTable,BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500,240);
         //Position the window relative the total screen size.
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

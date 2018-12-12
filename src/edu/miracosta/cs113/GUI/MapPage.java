@@ -26,5 +26,6 @@ public class MapPage extends JFrame {
         setLocation(x,y);
 
         setResizable(false);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }

@@ -94,7 +94,7 @@ public class FrontPage extends JFrame {
         add(panel1,BorderLayout.CENTER);
 
         setResizable(false);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //Set location that the window appears.
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -103,6 +103,7 @@ public class FrontPage extends JFrame {
         int x = (dim.width-w)*2/3;
         int y = (dim.height-h)/2;
         setLocation(x,y);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
