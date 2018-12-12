@@ -1,4 +1,6 @@
-package edu.miracosta.cs113;
+package edu.miracosta.cs113.GUI;
+
+import edu.miracosta.cs113.CitiesGraph;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

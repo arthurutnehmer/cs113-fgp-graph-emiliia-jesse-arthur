@@ -1,4 +1,6 @@
-package edu.miracosta.cs113;
+package edu.miracosta.cs113.GUI;
+
+import edu.miracosta.cs113.GUI.Controller;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
