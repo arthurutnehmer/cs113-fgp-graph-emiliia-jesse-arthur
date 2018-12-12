@@ -14,7 +14,7 @@ import java.util.Scanner;
  *
  * @author Jesse Wolf
  * @author Arthur Utnehmer
- * @auther Emiliia Dyrenkova
+ * @author Emiliia Dyrenkova
  */
 public class InfectionGraph
 {
@@ -219,6 +219,7 @@ public class InfectionGraph
      *
      * Pre: Only works if dijkstra's has already been ran therefore predecessors and distances arrays have been filled.
      * @param destination int of the destination you want to get to.
+     * @return int[] an array of int's storing the path to the destination.
      */
     public int[] printPathToDestination(int destination)
     {

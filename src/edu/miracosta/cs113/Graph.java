@@ -7,7 +7,7 @@ import java.util.Iterator;
  *
  * @author Jesse Wolf
  * @author Arthur Utnehmer
- * @auther Emiliia Dyrenkova
+ * @author Emiliia Dyrenkova
  */
 public interface Graph
 {

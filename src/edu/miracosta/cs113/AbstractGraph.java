@@ -8,7 +8,7 @@ import java.util.Scanner;
  *
  * @author Jesse Wolf
  * @author Arthur Utnehmer
- * @auther Emiliia Dyrenkova
+ * @author Emiliia Dyrenkova
  */
 public abstract class AbstractGraph implements Graph
 {
