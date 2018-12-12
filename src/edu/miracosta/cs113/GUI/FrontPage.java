@@ -24,9 +24,14 @@ public class FrontPage extends JFrame {
     private CustomTextField rateField;
     private JComboBox<String> cityCombo;
     private final String backgroundImageFile = "./resources/bioHazard.png";
+    private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
 
+    /**
+     * Constructor for the Front Page JFrame.
+     */
     public FrontPage(){
         //Must catch ClassNotFoundException, IllegalAccessException and UnsupportedLookAndFeelException.
+        //Changes the look and feel to match Nimbus.
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -37,48 +42,73 @@ public class FrontPage extends JFrame {
         } catch(Exception e) {
             e.getStackTrace();
         }
-        setLayout(new BorderLayout());
-        welcomeLabel=new JLabel("Welcome to...");
-        add(welcomeLabel,BorderLayout.NORTH);
-        setSize(525,550);
-        panel1=new JPanel();
 
+        //Set Layout to BorderLayout
+        setLayout(new BorderLayout());
+        setSize(525,550);
+
+        //Label for top of JFrame, set text and font then add to frame.
+        welcomeLabel=new JLabel("Welcome to Infection", SwingConstants.CENTER);
+        welcomeLabel.setFont(new Font("Serif", Font.BOLD, 28));
+        add(welcomeLabel,BorderLayout.NORTH);
+
+        //Create new panel within frame
+        panel1=new JPanel();
+        //Add background image from predefined file location.
         try {
             panel1 = new JPanelWithBackground(backgroundImageFile);
         } catch(IOException e) {
             System.out.println("Do you have all the necessary files to run this file? Please try again.");
         }
-        panel1.setLayout(new GridLayout(3,2));
+        //Set panel 1 layout to Grid of 3 row by 2 columns
+//        panel1.setLayout(new GridLayout(3,2));
+        panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 20,10));
 
+        //Label for the drop down
         cityLabel=new JLabel(" Enter starting city:");
-        cityLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        cityLabel.setFont(new Font("Serif", Font.BOLD, 30));
         panel1.add(cityLabel);
+
+        //Create drop down box and fill it with list of cities through use of fillCitiesCombo method.
         cityCombo=new JComboBox<>();
+        cityCombo.setPreferredSize(new Dimension(150,50));
         fillCitiesCombo();
         panel1.add(cityCombo);
 
+        //Label for the text box for infection rate.
         rateLabel=new JLabel("Enter infection rate:");
-        rateLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        rateLabel.setFont(new Font("Serif", Font.BOLD, 30));
         panel1.add(rateLabel);
+
 //        rateField=new JTextField("in people per day");
+        //Custom text field that allows for hint text to be visible until focus is put on it.
         rateField = new CustomTextField();
         rateField.setPlaceholder("in people per day.");
+        rateField.setPreferredSize(new Dimension(155,50));
         panel1.add(rateField);
 
+        //Button to move onto next
         rateButton = new JButton("Get Ratings");
+//        rateButton.setSize(new Dimension(150,100));
+        rateButton.setBackground(Color.GREEN);
         Controller controller = new Controller();
         rateButton.addActionListener(controller);
         add(rateButton,BorderLayout.SOUTH);
 
+
         add(panel1,BorderLayout.CENTER);
 
+        setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Takes city names from file and add to city combo drop down box.
+     */
     private void fillCitiesCombo(){
         try {
-            File citiesFile = new File("resources/cityNames.txt");
+            File citiesFile = new File(DEFAULT_CITY_NAMES_FILE);
             Scanner fileReader = new Scanner(new FileInputStream(citiesFile));
             while(fileReader.hasNextLine()){
                 cityCombo.addItem(fileReader.nextLine());
@@ -89,19 +119,27 @@ public class FrontPage extends JFrame {
         }
     }
 
+    /**
+     * Get selected city from the drop down box.
+     * @return int corresponding to selected city.
+     */
     protected int getChosenCity(){
         return cityCombo.getSelectedIndex();
     }
 
+    /**
+     * Private inner class used in order to have a panel with a background image.
+     */
     private class JPanelWithBackground extends JPanel {
         private Image backgroundImage;
 
         // Some code to initialize the background image.
-        // Here, we use the constructor to load the image.
+        // Use the constructor to load the image.
         public JPanelWithBackground(String fileName) throws IOException {
             backgroundImage = ImageIO.read(new File(fileName));
         }
 
+        //Paints the background image.
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
 
@@ -110,20 +148,28 @@ public class FrontPage extends JFrame {
         }
     }
 
+    /**
+     * Private inner class used in order to have hidden text until focus is placed on text field.
+     */
     private class CustomTextField extends JTextField {
 
         private Font originalFont;
         private Color originalForeground;
-        /**
-         * Grey by default*
-         */
+        //Grey by default
         private Color placeholderForeground = new Color(160, 160, 160);
         private boolean textWrittenIn;
 
+        /**
+         * Default Constructor. Calls super constructor for JTextField.
+         */
         public CustomTextField() {
             super();
         }
 
+        /**
+         * Constructor that takes in number of columns and passes this into super constructor for JTextField.
+         * @param columns int number of columns
+         */
         public CustomTextField(int columns) {
             super(columns);
         }
@@ -209,7 +255,6 @@ public class FrontPage extends JFrame {
                     }
 
                 }
-
                 @Override
                 public void focusLost(FocusEvent e)
                 {
@@ -220,6 +265,11 @@ public class FrontPage extends JFrame {
                 }
             });
         }
+
+        /**
+         * Customize text method that will set the text from passed in String
+         * @param text String text to write.
+         */
         private void customizeText(String text)
         {
             setText(text);
