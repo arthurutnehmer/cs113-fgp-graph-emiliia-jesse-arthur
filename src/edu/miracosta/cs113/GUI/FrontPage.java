@@ -1,7 +1,5 @@
 package edu.miracosta.cs113.GUI;
 
-import edu.miracosta.cs113.GUI.Controller;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.UIManager.*;
@@ -60,8 +58,6 @@ public class FrontPage extends JFrame {
         } catch(IOException e) {
             System.out.println("Do you have all the necessary files to run this file? Please try again.");
         }
-        //Set panel 1 layout to Grid of 3 row by 2 columns
-//        panel1.setLayout(new GridLayout(3,2));
         panel1.setLayout(new FlowLayout(FlowLayout.CENTER, 20,10));
 
         //Label for the drop down
@@ -78,29 +74,35 @@ public class FrontPage extends JFrame {
         //Label for the text box for infection rate.
         rateLabel=new JLabel("Enter infection rate:");
         rateLabel.setFont(new Font("Serif", Font.BOLD, 30));
+        //Add Vertical Space between the drop down box and this.
+        panel1.add(Box.createVerticalStrut(150));
         panel1.add(rateLabel);
 
-//        rateField=new JTextField("in people per day");
         //Custom text field that allows for hint text to be visible until focus is put on it.
         rateField = new CustomTextField();
         rateField.setPlaceholder("in people per day.");
         rateField.setPreferredSize(new Dimension(155,50));
         panel1.add(rateField);
 
-        //Button to move onto next
+        //Button to move onto next screen
         rateButton = new JButton("Get Ratings");
-//        rateButton.setSize(new Dimension(150,100));
         rateButton.setBackground(Color.GREEN);
         Controller controller = new Controller();
         rateButton.addActionListener(controller);
         add(rateButton,BorderLayout.SOUTH);
 
-
         add(panel1,BorderLayout.CENTER);
 
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+
+        //Set location that the window appears.
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = this.getSize().width;
+        int h = this.getSize().height;
+        int x = (dim.width-w)*2/3;
+        int y = (dim.height-h)/2;
+        setLocation(x,y);
     }
 
     /**
@@ -125,6 +127,20 @@ public class FrontPage extends JFrame {
      */
     protected int getChosenCity(){
         return cityCombo.getSelectedIndex();
+    }
+
+    /**
+     * Get infection rate that was entered in by the user.
+     * @return A double that corresponds to the infection rate the user passed in.
+     */
+    protected double getInfectionRate() {
+        double temp = 100;
+        try {
+            temp = Double.parseDouble(rateField.getText());
+        } catch(NumberFormatException e) {
+            System.out.println("Unexpected token within string. Please try again.");
+        }
+        return temp;
     }
 
     /**

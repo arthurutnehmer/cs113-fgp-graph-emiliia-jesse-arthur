@@ -11,13 +11,17 @@ import java.util.Scanner;
 /**
  * InfectionGraph Class that will be what holds an instance of ListGraph and does all the necessary actions to create a Graph.
  * Then manipulates the Graph with the use of dijkstra's algorithm for use in our Infection.
+ *
+ * @author Jesse Wolf
+ * @author Arthur Utnehmer
+ * @auther Emiliia Dyrenkova
  */
 public class InfectionGraph
 {
-    private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/citiesInput.txt";
-    private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
+    private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/newCitiesInput.txt";
+    private final String DEFAULT_CITY_NAMES_FILE = "./resources/newCityNames.txt";
     private NumberFormat formatter = new DecimalFormat("#0.00");
-    private ListGraph citiesGraph;
+    private ListGraph infectionGraph;
     private String[] cityNames;
     private int[] predecessors;
     private double[] distances;
@@ -28,13 +32,13 @@ public class InfectionGraph
      * predecessors and distances arrays to match the number of vertices in our graph.
      *
      * Post: cityNames array filled with cities from file.
-     *       citiesGraph has been initialized from file.
+     *       infectionGraph has been initialized from file.
      *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      */
     public InfectionGraph()
     {
         initializeGraph(DEFAULT_GRAPH_INPUT_FILE);
-        numberOfValues = citiesGraph.getNumV();
+        numberOfValues = infectionGraph.getNumV();
         predecessors = new int[numberOfValues];
         distances = new double[numberOfValues];
         cityNames = new String[numberOfValues];
@@ -48,14 +52,14 @@ public class InfectionGraph
      *      createGraph method.
      *
      * Post: cityNames array filled with cities from file.
-     *       citiesGraph has been initialized from file.
+     *       infectionGraph has been initialized from file.
      *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      * @param inputFileName String that will correspond to the properly formatted file to create our graph from.
      */
     public InfectionGraph(String inputFileName)
     {
         initializeGraph(inputFileName);
-        numberOfValues = citiesGraph.getNumV();
+        numberOfValues = infectionGraph.getNumV();
         predecessors = new int[numberOfValues];
         distances = new double[numberOfValues];
         cityNames = new String[numberOfValues];
@@ -125,6 +129,7 @@ public class InfectionGraph
     public String[] getCityNames(){
         return cityNames.clone();
     }
+
     /**
      * Initialize Graph using the passed in file name.
      * @param inputFileName String for the file name holding the edges data to be input.
@@ -139,7 +144,7 @@ public class InfectionGraph
         {
             System.out.println("File not found please try again.");
         }
-        citiesGraph = (ListGraph) ListGraph.createGraph(inputFile, false, "List");
+        infectionGraph = (ListGraph) ListGraph.createGraph(inputFile, false, "List");
     }
 
     /**
@@ -172,7 +177,7 @@ public class InfectionGraph
      */
     public void runDijkstras(int start)
     {
-        this.dijkstrasAlgorithm(this.citiesGraph, start, this.predecessors, this.distances);
+        this.dijkstrasAlgorithm(this.infectionGraph, start, this.predecessors, this.distances);
     }
 
     /**
@@ -182,7 +187,6 @@ public class InfectionGraph
      * populated.
      *
      * Post: The shortest path has been printed out to the screen.
-     * Post: The shortest path has been printed out to the screen.
      */
     public void printShortestPath()
     {
@@ -190,19 +194,33 @@ public class InfectionGraph
         {
             System.out.printf("V: " + i + " - d[v]: " + "%.2f", distances[i]);
             System.out.println(" - p[v]: " + predecessors[i]);
-            //If I want city names to print out uncomment below for use instead of above.
-//              System.out.printf("V: " + cityNames[i] + " - d[v]: " + "%.2f", distances[i]);
-//              System.out.println(" - p[v]: " + cityNames[predecessors[i]]);
         }
     }
 
     /**
-     * Print the path to a desired destination.
+     * A method to print out the results after dijkstra's has been ran and stored within distances and predecessors arrays.
+     *
+     * Pre: Dijkstra's has been ran therefore graph has been created and both predecessor and distances arrays have been
+     * populated. City Names must currently be stored in cityNames array as well. Assume that loadCitiesFromFile has been called.
+     *
+     * Post: The shortest path has been printed out to the screen with city names instead of indices.
+     */
+    public void printShortestPathWithCityNames()
+    {
+        for(int i = 0; i < predecessors.length; i++)
+        {
+            System.out.printf("V: " + cityNames[i] + " - d[v]: " + "%.2f", distances[i]);
+            System.out.println(" - p[v]: " + cityNames[predecessors[i]]);
+        }
+    }
+
+    /**
+     * Print the path to a desired destination. Returns an int[] of the path from the start to the destination.
      *
      * Pre: Only works if dijkstra's has already been ran therefore predecessors and distances arrays have been filled.
      * @param destination int of the destination you want to get to.
      */
-    public void printPathToDestination(int destination)
+    public int[] printPathToDestination(int destination)
     {
         int startVertex = -1;
         //Create an array to store the backtrack path
@@ -232,6 +250,38 @@ public class InfectionGraph
             System.out.print(temp + " ");
         }
         System.out.println();
+
+        //Iterate through my array to find out number of non zeros.
+        int numberOfNonZeros = 0;
+        for(int temp : backtrackFromDestination) {
+            if(temp != 0) {
+                numberOfNonZeros++;
+            }
+        }
+        //Add 2 to my numberOfNonZeros in order to be able to add the startVertex and destination. 1 additional for each.
+        int[] myPath = new int[numberOfNonZeros+2];
+
+        //Set mePath at 0 to be the start vertex.
+        myPath[0] = startVertex;
+        //Start counter at 1 to take into account startVertex being at index 0 now.
+        int counter = 1;
+        for(int temp : backtrackFromDestination) {
+            //If temp != 0 add temp to myPath.
+            if(temp != 0) {
+                System.out.println("Temp is: " + temp + " at: " + counter);
+                myPath[counter] = temp;
+                counter++;
+            }
+        }
+        //Set destination at end so that the path is now total path.
+        myPath[counter] = destination;
+
+        System.out.println("My Path: ");
+        for(int temp : myPath) {
+            System.out.println(temp);
+        }
+        System.out.println();
+        return myPath;
     }
 
     /**
@@ -289,12 +339,5 @@ public class InfectionGraph
                 }
             }
         }
-    }
-
-    public static void main(String[] args) {
-        InfectionGraph test = new InfectionGraph();
-        test.runDijkstras(0);
-        test.printShortestPath();
-        test.printPathToDestination(9);
     }
 }
