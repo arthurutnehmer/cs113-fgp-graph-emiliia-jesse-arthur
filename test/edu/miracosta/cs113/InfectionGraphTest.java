@@ -15,21 +15,23 @@ public class InfectionGraphTest
      * An object of Cities Graph class.
      */
     private InfectionGraph infectionGraphTest;
+    private String citiesInputFile = "./resources/citiesInput.txt";
 
     /**
      * Dijkstra's Outcomes on our default files.
      **/
     private static final int[][] PREDECESSORS = {
-            {0,0,6,8,5,0,0,6,7,3},{1,0,1,2,5,0,0,8,2,3},{6,2,1,2,5,0,2,8,2,3},
-            {6,2,3,2,5,0,7,8,3,3},{5,0,6,8,5,4,0,6,7,3},{5,0,6,8,5,4,0,6,7,3},
-            {6,0,6,8,5,0,0,6,7,3},{6,2,8,8,5,0,7,6,7,3},{6,2,8,8,5,0,7,8,7,3}};
+            {0,0,6,2,5,0,0,6,7,3},{1,0,1,2,5,0,0,8,2,3},{6,2,1,2,5,0,2,8,2,3},
+            {6,2,3,2,5,0,2,8,3,3},{5,0,6,2,5,4,0,6,7,3},{5,0,6,2,5,4,0,6,7,3},
+            {6,0,6,2,5,0,0,6,7,3},{6,2,8,8,5,0,7,6,7,3},{6,2,8,8,5,0,7,8,7,3}};
+
 
     private static final double[][] DISTANCES = {
-            {0.00,0.60,0.90,0.80,0.20,0.10,0.20,0.40,0.60,1.70}, {0.60,0.60,0.40,0.60,0.80,0.70,0.80,0.90,0.70,1.50},
-            {0.90,0.40,0.40,0.20,1.10,1.00,0.70,0.50,0.30,1.10}, {0.80,0.60,0.20,0.20,1.00,0.90,0.60,0.40,0.20,0.90},
-            {0.20,0.80,1.10,1.00,1.00,0.10,0.40,0.60,0.80,1.90}, {0.10,0.70,1.00,0.90,0.10,0.10,0.30,0.50,0.70,1.80},
-            {0.20,0.80,0.70,0.60,0.40,0.30,0.30,0.20,0.40,1.50}, {0.40,0.90,0.50,0.40,0.60,0.50,0.20,0.20,0.20,1.30},
-            {0.60,0.70,0.30,0.20,0.80,0.70,0.40,0.20,0.20,1.10}, {1.70,1.50,1.10,0.90,1.90,1.80,1.50,1.30,1.10,1.10}};
+            {0.00,1.50,2.75,3.75,1.00,0.50,1.00,2.00,3.00,5.55}, {1.50,1.50,1.33,2.33,2.50,2.00,2.50,3.33,2.33,4.13},
+            {2.75,1.33,1.33,1.00,3.75,3.25,1.75,2.00,1.00,2.80}, {3.75,2.33,1.00,1.00,4.75,4.25,2.75,2.00,1.00,1.80},
+            {1.00,2.50,3.75,4.75,4.75,0.50,2.00,3.00,4.00,6.55}, {0.50,2.00,3.25,4.25,0.50,0.50,1.50,2.50,3.50,6.05},
+            {1.00,2.50,1.75,2.75,2.00,1.50,1.50,1.00,2.00,4.55}, {2.00,3.33,2.00,2.00,3.00,2.50,1.00,1.00,1.00,3.80},
+            {3.00,2.33,1.00,1.00,4.00,3.50,2.00,1.00,1.00,2.80}, {1.70,1.50,1.10,3.33,1.90,1.80,1.50,1.30,1.10,1.10}};
 
     /**
      * This function is executed every single time before each test runs.
@@ -37,7 +39,8 @@ public class InfectionGraphTest
     @Before
     public void setup()
     {
-        infectionGraphTest = new InfectionGraph();
+        Weight.setInfectionRate(100);
+        infectionGraphTest = new InfectionGraph(citiesInputFile);
     }
 
     /**
@@ -59,11 +62,15 @@ public class InfectionGraphTest
             double[] expectedDistances = DISTANCES[row];
             for(int p = 0; p < testPredecessors.length; p++)
             {
+                System.out.println("Test: " + testPredecessors[p]);
+                System.out.println("Expe: " + expectedPredecessors[p]);
                 assertEquals("Expected Predecessors do not match.", testPredecessors[p], expectedPredecessors[p]);
             }
             //Had to get fancy with assertEquals for a double. Checking two doubles is not supported so formatted it before checking equality.
             for(int d = 0; d < testDistances.length; d++)
             {
+                System.out.println("Test: " + testDistances[d]);
+                System.out.println("Expe: " + expectedDistances[d]);
                 assertEquals("Expected Destination does not match.", formatter.format(testDistances[d]),formatter.format(expectedDistances[d]));
             }
         }
