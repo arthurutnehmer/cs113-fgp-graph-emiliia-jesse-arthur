@@ -1,10 +1,14 @@
 package edu.miracosta.cs113;
 
 import java.util.Scanner;
-import java.io.IOException;
+
 /**
  * Abstract base class for graphs.Edges are ordered pairs of vertices.
  * The vertices are represented by integers that range from 0 to n-1.
+ *
+ * @author Jesse Wolf
+ * @author Arthur Utnehmer
+ * @auther Emiliia Dyrenkova
  */
 public abstract class AbstractGraph implements Graph
 {
@@ -82,7 +86,7 @@ public abstract class AbstractGraph implements Graph
             double weight = 1.0;
             if (tokens.length == 3)
             {
-                weight = Double.parseDouble(tokens[2]);
+                weight = Weight.calculateNewWeight(Double.parseDouble(tokens[2]));
             }
             insert(new Edge(source, dest, weight));
         }
