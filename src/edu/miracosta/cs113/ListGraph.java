@@ -39,7 +39,15 @@ public class ListGraph extends AbstractGraph
      */
     public boolean isEdge(int source, int dest)
     {
-        return edges[source].contains(new Edge(source, dest));
+        try
+        {
+            return edges[source].contains(new Edge(source, dest));
+        }
+        catch (ArrayIndexOutOfBoundsException e)
+        {
+            return false;
+        }
+
     }
 
     /**
