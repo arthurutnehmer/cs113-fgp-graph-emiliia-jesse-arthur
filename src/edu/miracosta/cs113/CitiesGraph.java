@@ -94,6 +94,12 @@ public class CitiesGraph
 
     }//End of inner City class
 
+    /**
+     * Calculate and return the rating in a sorted order for the distances that were previously calculated using dijkstra's.
+     *
+     * Pre: Dijkstra's has been run prior to this method being called.
+     * @return String[][] of formatted distances and city names in order of least to greatest distance.
+     */
     public String[][] getRating(){
         City[] cities=new City[cityNames.length];
         for(int i=0;i<cityNames.length;i++){
@@ -166,7 +172,13 @@ public class CitiesGraph
     }
 
     /**
-     * A method to print out the results after dijkstras has been ran and stored within distances and predeccesors arrays.
+     * A method to print out the results after dijkstra's has been ran and stored within distances and predecessors arrays.
+     *
+     * Pre: Dijkstra's has been ran therefore graph has been created and both predecessor and distances arrays have been
+     * populated.
+     *
+     * Post: The shortest path has been printed out to the screen.
+     * Post: The shortest path has been printed out to the screen.
      */
     public void printShortestPath()
     {
@@ -181,25 +193,36 @@ public class CitiesGraph
     }
 
     /**
+     * Print the path to a desired destination.
      *
-     * @param destination
+     * Pre: Only works if dijkstra's has already been ran therefore predecessors and distances arrays have been filled.
+     * @param destination int of the destination you want to get to.
      */
     public void printPathToDestination(int destination)
     {
         int startVertex = -1;
+        //Create an array to store the backtrack path
         int[] backtrackFromDestination = new int[distances.length - 1];
+        //Initialize each value at -1 within the array
         for(int i = 0; i < distances.length; i++) {
             if(distances[i] == 0) {
                 startVertex = i;
             }
         }
+        //Start currentVertex to match the destination that was passed in.
         int currentVertex = destination;
-        int count = 0;
+        //Initialize count to size of array - 1.
+        int count = backtrackFromDestination.length-1;
         do {
+            //Update current vertex to be the predecessor
             currentVertex = predecessors[currentVertex];
+            //Enter this current vertex into array at count
             backtrackFromDestination[count] = currentVertex;
-            count++;
+            //Decrement count
+            count--;
+            //While our currentVertex != startVertex
         } while(predecessors[currentVertex] != startVertex);
+        //Print out the back order to screen.
         System.out.println("BackTrack order is: ");
         for(int temp : backtrackFromDestination) {
             System.out.print(temp + " ");
