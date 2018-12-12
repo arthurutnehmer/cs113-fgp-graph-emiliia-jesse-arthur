@@ -5,17 +5,16 @@ import org.junit.Test;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 /**
  * Cities Graph Tester. Various J Unit tests to test Cities Graph Methods.
  */
-public class CitiesGraphTest
+public class InfectionGraphTest
 {
     /**
      * An object of Cities Graph class.
      */
-    private CitiesGraph citiesGraphTest;
+    private InfectionGraph infectionGraphTest;
 
     /**
      * Dijkstra's Outcomes on our default files.
@@ -38,7 +37,7 @@ public class CitiesGraphTest
     @Before
     public void setup()
     {
-        citiesGraphTest = new CitiesGraph();
+        infectionGraphTest = new InfectionGraph();
     }
 
     /**
@@ -53,9 +52,9 @@ public class CitiesGraphTest
         double[] testDistances;
         for(int row = 0; row < PREDECESSORS.length;row++)
         {
-            citiesGraphTest.runDijkstras(row);
-            testPredecessors = citiesGraphTest.getPredecessors();
-            testDistances = citiesGraphTest.getDistances();
+            infectionGraphTest.runDijkstras(row);
+            testPredecessors = infectionGraphTest.getPredecessors();
+            testDistances = infectionGraphTest.getDistances();
             int[] expectedPredecessors = PREDECESSORS[row];
             double[] expectedDistances = DISTANCES[row];
             for(int p = 0; p < testPredecessors.length; p++)

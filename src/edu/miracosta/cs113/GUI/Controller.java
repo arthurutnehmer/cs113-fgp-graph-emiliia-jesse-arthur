@@ -1,6 +1,6 @@
 package edu.miracosta.cs113.GUI;
 
-import edu.miracosta.cs113.CitiesGraph;
+import edu.miracosta.cs113.InfectionGraph;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +12,7 @@ public class Controller implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         int city=frontPage.getChosenCity();
-        CitiesGraph graph=new CitiesGraph();
+        InfectionGraph graph=new InfectionGraph();
         graph.runDijkstras(city);
         ResultsPage results=new ResultsPage(10,graph.getRating());
         results.setVisible(true);

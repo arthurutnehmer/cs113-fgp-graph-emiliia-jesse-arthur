@@ -8,7 +8,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class CitiesGraph
+/**
+ * InfectionGraph Class that will be what holds an instance of ListGraph and does all the necessary actions to create a Graph.
+ * Then manipulates the Graph with the use of dijkstra's algorithm for use in our Infection.
+ */
+public class InfectionGraph
 {
     private final String DEFAULT_GRAPH_INPUT_FILE = "./resources/citiesInput.txt";
     private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
@@ -27,7 +31,7 @@ public class CitiesGraph
      *       citiesGraph has been initialized from file.
      *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      */
-    public CitiesGraph()
+    public InfectionGraph()
     {
         initializeGraph(DEFAULT_GRAPH_INPUT_FILE);
         numberOfValues = citiesGraph.getNumV();
@@ -48,7 +52,7 @@ public class CitiesGraph
      *       predecessors and distances array have been initialized to proper size(matching the number of vertices)
      * @param inputFileName String that will correspond to the properly formatted file to create our graph from.
      */
-    public CitiesGraph(String inputFileName)
+    public InfectionGraph(String inputFileName)
     {
         initializeGraph(inputFileName);
         numberOfValues = citiesGraph.getNumV();
@@ -288,7 +292,7 @@ public class CitiesGraph
     }
 
     public static void main(String[] args) {
-        CitiesGraph test = new CitiesGraph();
+        InfectionGraph test = new InfectionGraph();
         test.runDijkstras(0);
         test.printShortestPath();
         test.printPathToDestination(9);

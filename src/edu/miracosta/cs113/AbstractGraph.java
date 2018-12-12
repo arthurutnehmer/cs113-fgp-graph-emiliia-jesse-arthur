@@ -9,7 +9,7 @@ import java.io.IOException;
 public abstract class AbstractGraph implements Graph
 {
     private boolean directed;
-    private  int numV;
+    private int numV;
 
     /**
      * Constructs a graph with the specified number of vertices and
