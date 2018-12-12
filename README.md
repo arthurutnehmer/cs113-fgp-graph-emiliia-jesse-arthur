@@ -39,7 +39,7 @@ Complete the `Graph` class, either as an adjacency list or adjacency matrix, per
 [insert image(s) here to show main use/screen of program]
 
 ## UML Class+Relationship Diagram:
-[insert image here]
+![UML](resources/UML/GraphsUML.png)
 
 ## Sequence Diagram (for driver):
 [insert image here]
