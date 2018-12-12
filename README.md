@@ -36,7 +36,9 @@ Complete the `Graph` class, either as an adjacency list or adjacency matrix, per
 [insert name of algorithm here and how it's used]
 
 ## Screenshot(s):
-[insert image(s) here to show main use/screen of program]
+![Screenshots](resources/FrontPage.png)
+![MapPage](resources/MapPage.png)
+![ResultsPage](resources/Results.png)
 
 ## UML Class+Relationship Diagram:
 ![UML](resources/UML/GraphsUML.png)
