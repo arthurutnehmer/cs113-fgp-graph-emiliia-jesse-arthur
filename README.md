@@ -43,5 +43,7 @@ Complete the `Graph` class, either as an adjacency list or adjacency matrix, per
 ## UML Class+Relationship Diagram:
 ![UML](resources/UML/GraphsUML.png)
 
+![GUI UML](resources/UML/GuiUML.png)
+
 ## Sequence Diagram (for driver):
 [insert image here]
