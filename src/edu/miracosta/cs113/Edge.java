@@ -1,5 +1,12 @@
 package edu.miracosta.cs113;
 
+/**
+ * Edge Class for use within ListGraph.
+ *
+ *@author Jesse Wolf
+ *@author Arthur Utnehmer
+ *@auther Emiliia Dyrenkova
+ */
 public class Edge
 {
     // Data Fields

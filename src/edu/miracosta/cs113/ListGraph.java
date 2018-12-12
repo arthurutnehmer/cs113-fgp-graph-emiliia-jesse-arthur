@@ -1,7 +1,6 @@
 package edu.miracosta.cs113;
 
 import java.util.*;
-import java.io.*;
 
 /**
  * A ListGraph is an extension of the AbstractGraph abstract class
@@ -47,7 +46,6 @@ public class ListGraph extends AbstractGraph
         {
             return false;
         }
-
     }
 
     /**

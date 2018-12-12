@@ -2,6 +2,13 @@ package edu.miracosta.cs113;
 
 import java.util.Iterator;
 
+/**
+ * Graph Interface.
+ *
+ * @author Jesse Wolf
+ * @author Arthur Utnehmer
+ * @auther Emiliia Dyrenkova
+ */
 public interface Graph
 {
     //Accessor Methods
