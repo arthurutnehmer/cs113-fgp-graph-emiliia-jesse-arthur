@@ -21,8 +21,8 @@ public class FrontPage extends JFrame {
     private JButton rateButton;
     private CustomTextField rateField;
     private JComboBox<String> cityCombo;
-    private final String backgroundImageFile = "./resources/bioHazard.png";
-    private final String DEFAULT_CITY_NAMES_FILE = "./resources/cityNames.txt";
+    private final String BACKGROUND_IMAGE_FILE = "./resources/bioHazard.png";
+    private final String DEFAULT_CITY_NAMES_FILE = "./resources/newCityNames.txt";
 
     /**
      * Constructor for the Front Page JFrame.
@@ -54,7 +54,7 @@ public class FrontPage extends JFrame {
         panel1=new JPanel();
         //Add background image from predefined file location.
         try {
-            panel1 = new JPanelWithBackground(backgroundImageFile);
+            panel1 = new JPanelWithBackground(BACKGROUND_IMAGE_FILE);
         } catch(IOException e) {
             System.out.println("Do you have all the necessary files to run this file? Please try again.");
         }
