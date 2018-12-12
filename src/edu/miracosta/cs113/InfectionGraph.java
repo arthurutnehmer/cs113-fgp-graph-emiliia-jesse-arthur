@@ -268,7 +268,6 @@ public class InfectionGraph
         for(int temp : backtrackFromDestination) {
             //If temp != 0 add temp to myPath.
             if(temp != 0) {
-                System.out.println("Temp is: " + temp + " at: " + counter);
                 myPath[counter] = temp;
                 counter++;
             }
@@ -276,7 +275,7 @@ public class InfectionGraph
         //Set destination at end so that the path is now total path.
         myPath[counter] = destination;
 
-        System.out.println("My Path: ");
+        System.out.println("My Path is: ");
         for(int temp : myPath) {
             System.out.println(temp);
         }
